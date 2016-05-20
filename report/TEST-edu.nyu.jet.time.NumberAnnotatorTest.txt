@@ -1,0 +1,43 @@
+Testsuite: edu.nyu.jet.time.NumberAnnotatorTest
+Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0.231 sec
+------------- Standard Output ---------------
+<token><number value="1">one</number></token>
+<token><number value="2">two</number></token>
+<token><number value="3">three</number></token>
+<token><number value="4">four</number></token>
+<token><number value="5">five</number></token>
+<token><number value="6">six</number></token>
+<token><number value="7">seven</number></token>
+<token><number value="8">eight</number></token>
+<token><number value="9">nine</number></token>
+<token><number value="10">ten</number></token>
+<token case="forcedCap"><number value="11">Eleven</number></token>
+<token><number value="12">twelve</number></token>
+<token><number value="13">thirteen</number></token>
+<token><number value="14">fourteen</number></token>
+<token><number value="15">fifteen</number></token>
+<token><number value="16">sixteen</number></token>
+<token><number value="17">seventeen</number></token>
+<token><number value="18">eighteen</number></token>
+<token><number value="19">nineteen</number></token>
+<token><number value="20">twenty</number></token>
+<token><number value="30">thirty</number></token>
+<token><number value="40">forty</number></token>
+<token><number value="50">fifty</number></token>
+<token><number value="60">sixty</number></token>
+<token><number value="70">seventy</number></token>
+<token><number value="80">eighty</number></token>
+<token><number value="90">ninety</number></token>
+<token><number value="100">hundred</number></token>
+<token>the </token><token><number value="4" ordinal="true">fourth </number></token><token
+>of </token><token case="cap">November</token>
+<token><number value="5" ordinal="true">fifth</number></token>
+<token><number value="1000" ordinal="true">thousandth</number></token>
+<number value="52" ordinal="true"><token>fifty </token><token>second</token></number>
+<token intvalue="2004"><number value="2004">2004 </number></token><token intvalue="5"
+><number value="5">05</number></token>
+------------- ---------------- ---------------
+
+Testcase: testSimple took 0.024 sec
+Testcase: testOrdinal took 0.004 sec
+Testcase: testManyDigits took 0.002 sec

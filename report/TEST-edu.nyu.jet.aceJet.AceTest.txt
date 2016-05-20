@@ -1,0 +1,68 @@
+Testsuite: edu.nyu.jet.aceJet.AceTest
+Tests run: 2, Failures: 0, Errors: 2, Time elapsed: 3.445 sec
+------------- Standard Output ---------------
+Loading word clusters from data/../kddData/aceAllAndKDD.brownCluster
+GIS model modelFile-0 loaded.
+GIS model modelFile-1 loaded.
+GIS model modelFile-2 loaded.
+GIS model modelFile-3 loaded.
+5834 patterns loaded
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+Reading lexicon data/titles.dict
+87 lexical entries read
+Reading lexicon data/Jet4.dict
+39811 lexical entries read
+Error: reading name tag file data/../kddData/ACEGalenameMEmodel.WC.txt, data/../kddData/ACEGalenameMEmodel.WC.txt (No such file or directory)
+Error: reading cluster file data/../kddData/aceAllAndKDD.brownCluster, data/../kddData/aceAllAndKDD.brownCluster (No such file or directory)
+Chunker model loaded from data/chunkModel.txt
+Reading gender dictionary gender.dict
+Loading gazetteer.
+Jet Ver. 1.8.1.  Portions (c) 1999-2015 R. Grishman
+Licensed under Apache License, Version 2.0.
+Loading type dictionary data/../acedata/EDT type dict 05.txt
+Type dictionary loaded.
+Loading generic dictionary.
+Generic dictionary loaded.
+[main] INFO edu.nyu.jet.aceJet.FindAceValues - Loading type dictionary data/../acedata/values.dict
+[main] INFO edu.nyu.jet.aceJet.FindAceValues - Value dictionary loaded.
+AcePatternNode: invalid constructor argument: Rebellions
+AcePatternNode: invalid constructor argument: in
+AcePatternNode: invalid constructor argument: eleven
+AcePatternNode: invalid constructor argument: to be
+GIS model eventModel.log loaded.
+GIS model argModel.log loaded.
+GIS model roleModel.log loaded.
+GIS model corefModel.log loaded.
+------------- ---------------- ---------------
+
+Testcase: testAce2 took 0.018 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at edu.nyu.jet.MaxEntModel.getNumOutcomes(Unknown Source)
+	at edu.nyu.jet.chunk.MaxEntNE.viterbi(Unknown Source)
+	at edu.nyu.jet.hmm.HMMannotator.annotateSpan(Unknown Source)
+	at edu.nyu.jet.chunk.MENameTagger.tag(Unknown Source)
+	at edu.nyu.jet.Control.applyScript(Unknown Source)
+	at edu.nyu.jet.Control.applyScript(Unknown Source)
+	at edu.nyu.jet.Control.applyScript(Unknown Source)
+	at edu.nyu.jet.Control.processDocument(Unknown Source)
+	at edu.nyu.jet.aceJet.Ace.processDocument(Unknown Source)
+	at edu.nyu.jet.aceJet.AceTest.testAce2(Unknown Source)
+
+Testcase: testAce1 took 0.002 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at edu.nyu.jet.MaxEntModel.getNumOutcomes(Unknown Source)
+	at edu.nyu.jet.chunk.MaxEntNE.viterbi(Unknown Source)
+	at edu.nyu.jet.hmm.HMMannotator.annotateSpan(Unknown Source)
+	at edu.nyu.jet.chunk.MENameTagger.tag(Unknown Source)
+	at edu.nyu.jet.Control.applyScript(Unknown Source)
+	at edu.nyu.jet.Control.applyScript(Unknown Source)
+	at edu.nyu.jet.Control.applyScript(Unknown Source)
+	at edu.nyu.jet.Control.processDocument(Unknown Source)
+	at edu.nyu.jet.aceJet.Ace.processDocument(Unknown Source)
+	at edu.nyu.jet.aceJet.AceTest.testAce1(Unknown Source)
+

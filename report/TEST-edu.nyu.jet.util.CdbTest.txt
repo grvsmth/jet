@@ -1,0 +1,4 @@
+Testsuite: edu.nyu.jet.util.CdbTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.322 sec
+
+Testcase: testBuildCdb took 0.267 sec
