@@ -1,9 +1,0 @@
-Testsuite: edu.nyu.jet.util.DoubleArrayTrieTest
-Tests run: 6, Failures: 0, Errors: 0, Time elapsed: 0.933 sec
-
-Testcase: testCommonPrefixSearchWithValues took 0.132 sec
-Testcase: testCommonPrefixWithOffset took 0.078 sec
-Testcase: testCommonPrefixSearchWithoutValues took 0.049 sec
-Testcase: testSaveAndLoad took 0.191 sec
-Testcase: testExactMatchSearch took 0.022 sec
-Testcase: testGetLongestCommonPrefix took 0.05 sec

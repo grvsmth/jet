@@ -1,8 +1,0 @@
-Testsuite: edu.nyu.jet.chunk.TreeBasedChunkerTest
-Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 0.312 sec
-
-Testcase: testAux took 0.029 sec
-Testcase: testSimpleChunk took 0.009 sec
-Testcase: testEmptySInVP took 0.016 sec
-Testcase: testPruneInFrontOfHead took 0.012 sec
-Testcase: testPOS took 0.011 sec

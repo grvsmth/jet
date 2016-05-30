@@ -1,4 +1,0 @@
-Testsuite: edu.nyu.jet.lisp.FeatureSetTest
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.077 sec
-
-Testcase: testEquals took 0.004 sec

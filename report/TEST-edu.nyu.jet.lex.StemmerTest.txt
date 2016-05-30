@@ -1,8 +1,0 @@
-Testsuite: edu.nyu.jet.lex.StemmerTest
-Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 0.84 sec
-
-Testcase: testStem1 took 0.022 sec
-Testcase: testStem2 took 0.003 sec
-Testcase: testStem3 took 0.002 sec
-Testcase: testNN took 0.002 sec
-Testcase: testParseTree took 0.01 sec

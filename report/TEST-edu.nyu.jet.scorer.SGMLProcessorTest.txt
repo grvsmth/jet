@@ -1,4 +1,0 @@
-Testsuite: edu.nyu.jet.scorer.SGMLProcessorTest
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.062 sec
-
-Testcase: testAnnotations took 0.013 sec

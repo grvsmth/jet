@@ -1,5 +1,0 @@
-Testsuite: edu.nyu.jet.parser.DependencyAnalyzerTest
-Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.296 sec
-
-Testcase: testResolveTerminalDependency took 0.031 sec
-Testcase: testHeadNodeHasNoHead took 0.005 sec

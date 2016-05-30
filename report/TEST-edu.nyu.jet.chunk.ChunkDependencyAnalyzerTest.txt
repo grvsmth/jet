@@ -1,5 +1,0 @@
-Testsuite: edu.nyu.jet.chunk.ChunkDependencyAnalyzerTest
-Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.179 sec
-
-Testcase: testAnalyzeChunkDependency took 0.045 sec
-Testcase: testAnalyzeChunkDependency2 took 0.004 sec
