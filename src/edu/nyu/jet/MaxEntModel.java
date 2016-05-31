@@ -7,6 +7,7 @@ import opennlp.maxent.*;
 import opennlp.maxent.io.*;
 import opennlp.model.*;
 import edu.nyu.jet.aceJet.Datum;
+import edu.nyu.jet.chunk.*;
 
 /**
  * a wrapper for the maximum entropy code provided in the OpenNLP package.
@@ -91,6 +92,13 @@ public class MaxEntModel {
         this.iterations = iterations;
     }
 
+	private static GISModel trainL2Model(EventStream eventStream, 
+										int cutoff,
+										double c) throws IOException {
+		GISTrainer trainer = new LBFGSTrainer(c);
+		return trainer.trainModel(eventStream, 100, cutoff);
+    } 
+
     public void buildModel() {
         boolean USE_SMOOTHING = false;
         double SMOOTHING_OBSERVATION = 0.1;
@@ -102,7 +110,7 @@ public class MaxEntModel {
                     new BasicEventStream(new PlainTextByLineDataStream(datafr));
             GIS.SMOOTHING_OBSERVATION = SMOOTHING_OBSERVATION;
 	    if (USE_L2)
-                model = GIS.trainL2Model(es, 0, 2);
+                model = trainL2Model(es, 0, 2);
 	    else
                 model = GIS.trainModel(es, iterations, cutoff, USE_SMOOTHING, PRINT_MESSAGES);
         } catch (Exception e) {
@@ -191,7 +199,8 @@ public class MaxEntModel {
     }
 
     public int getNumOutcomes() {
-        return model.getNumOutcomes();
+		return model.getNumOutcomes();
+
     }
 
     public String getOutcome(int i) {

@@ -14,10 +14,10 @@ import edu.nyu.jet.chunk.Chunker;
 import edu.nyu.jet.zoner.SpecialZoner;
 import edu.nyu.jet.aceJet.Ace;
 
-import danbikel.parser.Parser;
-import danbikel.parser.Settings;
-import danbikel.parser.english.HeadFinder;
-import danbikel.lisp.*;
+import edu.nyu.jet.parserStub.Parser;
+import edu.nyu.jet.parserStub.Settings;
+import edu.nyu.jet.parserStub.HeadFinder;
+import edu.nyu.jet.parserStub.lisp.*;
 
 import java.util.*;
 import java.io.*;
