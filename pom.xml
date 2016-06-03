@@ -45,6 +45,66 @@
                     </execution>
                 </executions>
             </plugin>
+	    <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-install-plugin</artifactId>
+	      <version>2.5.2</version>
+              <executions>
+		<execution>
+                  <id>install-mallet</id>
+                  <phase>process-resources</phase>
+                  <configuration>
+                    <file>${basedir}/lib/mallet.jar</file>
+                    <repositoryLayout>default</repositoryLayout>
+                    <groupId>edu.umass.cs</groupId>
+                    <artifactId>base.mallet</artifactId>
+                    <version>0.4</version>
+                    <packaging>jar</packaging>
+                    <generatePom>true</generatePom>
+                  </configuration>
+                  <goals>
+                    <goal>install-file</goal>
+                  </goals>
+		</execution>
+		<execution>
+                  <id>install-mallet-crf</id>
+                  <phase>process-resources</phase>
+                  <configuration>
+                    <file>${basedir}/lib/mallet-crf.jar</file>
+                    <repositoryLayout>default</repositoryLayout>
+                    <groupId>edu.umass.cs</groupId>
+                    <artifactId>base.mallet.fst</artifactId>
+                    <version>0.4</version>
+                    <packaging>jar</packaging>
+                    <generatePom>true</generatePom>
+                  </configuration>
+                  <goals>
+                    <goal>install-file</goal>
+                  </goals>
+		</execution>
+		<execution>
+                  <id>install-fanseparser</id>
+                  <phase>process-resources</phase>
+                  <configuration>
+                    <file>${basedir}/lib/fanseparser-0.2.2.jar</file>
+                    <repositoryLayout>default</repositoryLayout>
+                    <groupId>edu.isi</groupId>
+                    <artifactId>fanseparser</artifactId>
+                    <version>0.2.2</version>
+                    <packaging>jar</packaging>
+                    <generatePom>true</generatePom>
+                  </configuration>
+                  <goals>
+                    <goal>install-file</goal>
+                  </goals>
+		</execution>
+              </executions>
+	    </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>2.19.1</version>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -89,9 +149,14 @@
 	</dependency>
 	<!-- http://mvnrepository.com/artifact/cc.mallet/mallet -->
 	<dependency>
-	  <groupId>cc.mallet</groupId>
+	  <groupId>edu.umass.cs</groupId>
 	  <artifactId>mallet</artifactId>
-	  <version>2.0.8</version>
+	  <version>0.4</version>
+	</dependency>
+	<dependency>
+	  <groupId>edu.umass.cs</groupId>
+	  <artifactId>mallet.fst</artifactId>
+	  <version>0.4</version>
 	</dependency>
 	<!-- http://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 	<dependency>
@@ -105,11 +170,6 @@
 	  <artifactId>slf4j-simple</artifactId>
 	  <version>1.7.5</version>
 	</dependency>
-	<!-- dependency>
-	  <groupId>cc.mallet</groupId>
-	  <artifactId>mallet-crf</artifactId>
-	  <version>2.0.8</version>
-	</dependency -->
  	<dependency>
 	  <groupId>edu.isi</groupId>
 	  <artifactId>fanseparser</artifactId>

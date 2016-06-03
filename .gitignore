@@ -1,5 +1,6 @@
 *~
 report/*
-lib/*
+target/*
+lib/old/*
 build/*
 repackage.py
