@@ -7,17 +7,17 @@ import java.util.List;
 import edu.nyu.jet.tipster.Annotation;
 import edu.nyu.jet.tipster.Document;
 import edu.nyu.jet.tipster.Span;
-import cc.mallet.pipe.Pipe;
-import cc.mallet.types.Instance;
-import cc.mallet.types.Alphabet;
-import cc.mallet.types.LabelAlphabet;
-import cc.mallet.types.LabelSequence;
-import cc.mallet.types.Token;
-import cc.mallet.types.TokenSequence;
+import edu.umass.cs.mallet.base.pipe.Pipe;
+import edu.umass.cs.mallet.base.types.Instance;
+import edu.umass.cs.mallet.base.types.Alphabet;
+import edu.umass.cs.mallet.base.types.LabelAlphabet;
+import edu.umass.cs.mallet.base.types.LabelSequence;
+import edu.umass.cs.mallet.base.types.Token;
+import edu.umass.cs.mallet.base.types.TokenSequence;
 
 public class SentenceToTokenSequencePipe extends Pipe {
 	public SentenceToTokenSequencePipe() {
-		super(null, null);
+		super(null, LabelAlphabet.class);
 	}
 
 	@Override

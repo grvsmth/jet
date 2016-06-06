@@ -1,9 +1,9 @@
 // -*- tab-width: 4 -*-
 package edu.nyu.jet.ne;
 
-import cc.mallet.types.Instance;
-import cc.mallet.types.Token;
-import cc.mallet.types.TokenSequence;
+import edu.umass.cs.mallet.base.types.Instance;
+import edu.umass.cs.mallet.base.types.Token;
+import edu.umass.cs.mallet.base.types.TokenSequence;
 
 class SummarizedPatternFeature extends PatternFeature {
 	public SummarizedPatternFeature(String prefix) {
@@ -15,7 +15,7 @@ class SummarizedPatternFeature extends PatternFeature {
 		String prefix = getPrefix();
 
 		for (int i = 0; i < tokens.size(); i++) {
-			Token token = tokens.get(i);
+			Token token = tokens.getToken(i);
 			String name = prefix + getSummarizedPattern(token.getText());
 			token.setFeatureValue(name, 1.0);
 		}

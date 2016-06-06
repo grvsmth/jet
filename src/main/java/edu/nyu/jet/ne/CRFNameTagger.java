@@ -69,12 +69,12 @@ public class CRFNameTagger {
 		InstanceList trainingData = new InstanceList(pipe);
 		for (Document doc : docs) {
 			PipeInputIterator iter = new DocumentToSentenceIterator(doc, "TEXT", trainingData
-					.size() + 1);
+																	.size() + 1);
 
 			while (iter.hasNext()) {
-				Instance carrier = iter.next();
+				Instance carrier = iter.nextInstance();
 				carrier.setPropertyList(properties);
-				trainingData.add(pipe.pipe(carrier.shallowCopy()));
+				trainingData.add(carrier.getPipedCopy(pipe));
 			}
 		}
 
@@ -196,7 +196,7 @@ public class CRFNameTagger {
 
 	public void readModel(InputStream in) throws IOException, ClassNotFoundException {
 		ObjectInputStream objIn = new ObjectInputStream(in);
-		crf = (CRF) objIn.readObject();
+		crf = (CRF3) objIn.readObject();
 	}
 
 	public void readModel(File file) throws IOException, ClassNotFoundException {
@@ -248,7 +248,7 @@ public class CRFNameTagger {
 	}
 
 	private static void train(File modelFile, File list) throws IOException,
-			ParserConfigurationException, SAXException {
+																ParserConfigurationException, SAXException {
 		Collection<Document> docs = loadDocumentCollection(list);
 		prepareDocuments(docs);
 		Dictionary dict = loadDictionary();
@@ -260,14 +260,14 @@ public class CRFNameTagger {
 	}
 
 	public static void test(File modelFile, File list, File outDir) throws IOException,
-			ParserConfigurationException, SAXException, ClassNotFoundException {
+																		   ParserConfigurationException, SAXException, ClassNotFoundException {
 
 		Collection<Document> docs = loadDocumentCollection(list);
 		prepareDocuments(docs);
 
 		Dictionary dict = loadDictionary();
 		CRFNameTagger tagger = new CRFNameTagger();
-		tager.setProperty("dictionary", dict);
+		tagger.setProperty("dictionary", dict);
 		tagger.readModel(modelFile);
 
 		InstanceList testingData = new InstanceList(tagger.crf.getInputPipe());
@@ -276,7 +276,7 @@ public class CRFNameTagger {
 			for (Annotation sentence : sentences) {
 				Instance carrier = new Instance(sentence.span(), null, "sentence", doc);
 				carrier.setPropertyList(tagger.properties);
-				carrier = tagger.crf.getInputPipe().pipe(carrier.shallowCopy());
+				carrier = carrier.getPipedCopy(tagger.crf.getInputPipe());
 				testingData.add(carrier);
 			}
 		}
@@ -286,7 +286,7 @@ public class CRFNameTagger {
 		try {
 			out = new PrintStream(new File(outDir, "tokens.txt"));
 			for (int i = 0; i < testingData.size(); i++) {
-				Instance carrier = testingData.get(i);
+				Instance carrier = testingData.getInstance(i);
 				TokenSequence tokens = (TokenSequence) carrier.getSource();
 				Sequence expected = (Sequence) carrier.getTarget();
 				Sequence input = (Sequence) carrier.getData();
@@ -296,8 +296,8 @@ public class CRFNameTagger {
 				assert tokens.size() == expected.size();
 
 				for (int j = 0; j < tokens.size(); j++) {
-					out.printf("%-20s %15s %15s", tokens.get(j).getText(), expected.get(j),
-							actual.get(j));
+					out.printf("%-20s %15s %15s", tokens.getToken(j).getText(), expected.get(j),
+							   actual.get(j));
 					out.println();
 				}
 				out.println();
@@ -326,7 +326,7 @@ public class CRFNameTagger {
 			System.out.println();
 		}
 		System.out.printf("%-15s\t%10.2f\t%10.2f", "TOTAL", evaluator.getPrecision(), evaluator
-				.getRecall());
+						  .getRecall());
 		System.out.println();
 
 		for (Document doc : docs) {

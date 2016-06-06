@@ -1,10 +1,10 @@
 // -*- tab-width: 4 -*-
 package edu.nyu.jet.ne;
 
-import cc.mallet.pipe.Pipe;
-import cc.mallet.types.Instance;
-import cc.mallet.types.Token;
-import cc.mallet.types.TokenSequence;
+import edu.umass.cs.mallet.base.pipe.Pipe;
+import edu.umass.cs.mallet.base.types.Instance;
+import edu.umass.cs.mallet.base.types.Token;
+import edu.umass.cs.mallet.base.types.TokenSequence;
 
 /**
  * Abstract Pipe class for adds feature value which is boolean value.
@@ -22,7 +22,7 @@ public abstract class BooleanFeature extends Pipe {
 		TokenSequence tokens = (TokenSequence) carrier.getData();
 
 		for (int i = 0; i < tokens.size(); i++) {
-			Token token = tokens.get(i);
+			Token token = tokens.getToken(i);
 			String word = token.getText();
 
 			if (matches(word)) {

@@ -1,6 +1,7 @@
 // -*- tab-width: 4 -*-
 package edu.nyu.jet.ne;
 
+import java.util.Iterator;
 import java.util.List;
 
 import edu.nyu.jet.tipster.Annotation;

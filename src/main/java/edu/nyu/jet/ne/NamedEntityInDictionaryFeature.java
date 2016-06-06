@@ -10,10 +10,10 @@ import edu.nyu.jet.lisp.FeatureSet;
 import edu.nyu.jet.tipster.Annotation;
 import edu.nyu.jet.tipster.Document;
 import edu.nyu.jet.tipster.Span;
-import cc.mallet.pipe.Pipe;
-import cc.mallet.types.Instance;
-import cc.mallet.types.Token;
-import cc.mallet.types.TokenSequence;
+import edu.umass.cs.mallet.base.pipe.Pipe;
+import edu.umass.cs.mallet.base.types.Instance;
+import edu.umass.cs.mallet.base.types.Token;
+import edu.umass.cs.mallet.base.types.TokenSequence;
 
 public class NamedEntityInDictionaryFeature extends Pipe {
 	private String prefix;
@@ -47,7 +47,7 @@ public class NamedEntityInDictionaryFeature extends Pipe {
 		assert tokens.size() == neTokens.size() : tokens.size() + " != " + neTokens.size();
 
 		for (int i = 0; i < neTokens.size(); i++) {
-			Token token = tokens.get(i);
+			Token token = tokens.getToken(i);
 			Annotation neToken = neTokens.get(i);
 			Set<NamedEntityAttribute> categories = (Set<NamedEntityAttribute>) neToken
 					.get("categories");
@@ -66,7 +66,7 @@ public class NamedEntityInDictionaryFeature extends Pipe {
 
 	private void annotateNETokens(Document doc, TokenSequence tokens) {
 		for (int i = 0; i < tokens.size(); i++) {
-			Token token = tokens.get(i);
+			Token token = tokens.getToken(i);
 			Span span = (Span) token.getProperty("span");
 			Set<NamedEntityAttribute> categories = new HashSet<NamedEntityAttribute>();
 			FeatureSet fs = new FeatureSet();
