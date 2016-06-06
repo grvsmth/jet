@@ -29,7 +29,7 @@ import edu.nyu.jet.util.StringUtils;
 
 public class HeadRule {
 	/** path to default rule file */
-	private static final String DEFAULT_RULE_PATH = "edu/nyu/jet/parser/resources/head_rule.txt";
+	private static final String DEFAULT_RULE_PATH = "edu/nyu/jet/parser/head_rule.txt";
 
 	/** encoding of default rule file */
 	private static final String DEFAULT_RULE_ENCODING = "US-ASCII";
@@ -157,7 +157,7 @@ public class HeadRule {
 	 */
 	public static HeadRule getRule(Reader in) throws IOException, InvalidFormatException {
 		HeadRule rule = new HeadRule();
-		//		rule.load(in);
+		rule.load(in);
 		return rule;
 	}
 

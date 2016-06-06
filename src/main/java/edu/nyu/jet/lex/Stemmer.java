@@ -62,7 +62,7 @@ public class Stemmer {
         InputStream in = null;
         try {
             in = Stemmer.class.getClassLoader().getResourceAsStream(
-                    "edu/nyu/jet/lex/resources/stem.dict");
+                    "edu/nyu/jet/lex/stem.dict");
             Reader reader = new InputStreamReader(in, DICT_ENCODING);
             Stemmer stemmer = new Stemmer();
             stemmer.loadDictionary(reader);
