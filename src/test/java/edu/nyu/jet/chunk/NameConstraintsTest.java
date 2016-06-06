@@ -43,8 +43,8 @@ public class NameConstraintsTest {
 
 	@Test // name entirely unknown to tagger
 	public void testConstraints2 () throws Exception {
-		match ( "Her name is Heng Ji. ",
-			"Her name is Heng Ji." );
+		match ( "Her name is Abc Xyz. ",
+			"Her name is Abc Xyz." );
 	}
 
 	@Test // simple test of <isName> surrounding entire name
