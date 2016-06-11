@@ -236,6 +236,7 @@ public class AceDocument {
 		StringBuffer fileText = new StringBuffer();
 		while((line = reader.readLine()) != null)
 			fileText.append(line + "\n");
+		reader.close();
 		return fileText;
 	}
 
