@@ -1,3 +1,5 @@
+package edu.nyu.jet;
+
 /**
  * Copyright (c) 2004-2012 QOS.ch
  * All rights reserved.
@@ -42,6 +44,7 @@ import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MarkerIgnoringBase;
 import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.helpers.Util;
+import org.slf4j.impl.SimpleLoggerFactory;
 import org.slf4j.spi.LocationAwareLogger;
 
 /**

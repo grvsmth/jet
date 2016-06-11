@@ -1,35 +1,26 @@
 package edu.nyu.jet.lex;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.HashMap;
-import java.util.Vector;
+import java.io.*;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import edu.nyu.jet.Console;
-import edu.nyu.jet.tipster.Annotation;
-import edu.nyu.jet.tipster.Document;
-import edu.nyu.jet.tipster.Span;
+import edu.nyu.jet.lisp.FeatureSet;
+import edu.nyu.jet.tipster.*;
 import edu.nyu.jet.util.IOUtils;
 
 /**
  * Stemmer provides method for getting stem of word.
- * <p/>
- * Stemmer uses stem dictionary which written in plain text. Each line of stem
- * dictionary will be as following
- * <p/>
- * <pre>
+ * 
+ * Stemmer uses stem dictionary which is written in plain text. Each
+ * line of stem dictionary will be as follows
+ * 
  *  do	did does doing done
- * </pre>
- * <p/>
- * Each word is separated by whitepsace characters. First word is stem and other
- * words are inflected word.
+ * 
+ * Each word is separated by whitepsace characters. First word is stem
+ * and other words are inflected forms.
  *
- * @author Akira ODA
+ * @author Akira ODA (revised 2015 R. Grishman)
  */
 public class Stemmer {
     private static final String DICT_ENCODING = "US-ASCII";
@@ -222,5 +213,63 @@ public class Stemmer {
             }
         }
         return false;
+    }
+
+    /**
+     *  converts a Jet English dictionary into the dictionary format used by the Stemmer.
+     *  Takes two arguments:  a file containing a Jet dictionary (input), and the
+     *  file into which the stem dictionary should be written.
+     */
+
+    public static void main (String[] args) throws IOException {
+
+	if (args.length != 2) {
+	    System.err.println("Stemmer requires two arguments: jetDictionary stemDictionary");
+	    System.exit(1);
+	}
+	String jetDict = args[0];
+	String stemDict = args[1];
+    
+	EnglishLex.readLexicon(jetDict);
+    
+	Map<String, Set<String>> inflections = new TreeMap<String, Set<String>>();
+	for (Object key : Lexicon.lexiconIndex.keySet()) {
+	    Vector<LexicalEntry> ev = (Vector<LexicalEntry>) Lexicon.lexiconIndex.get(key);
+	    for (LexicalEntry e : ev) {
+		if (e.words.length == 1) {
+		    for (FeatureSet f : e.getDefinition()) {
+			addInflection (inflections, e.words[0], f);
+		    }
+		}
+	    }
+	}
+    
+	PrintWriter writer = new PrintWriter (new FileWriter (stemDict));
+	for (String lemma : inflections.keySet()) {
+	    writer.print(lemma);
+	    for (String inflectedForm : inflections.get(lemma))
+		writer.print("\t" + inflectedForm);
+	    writer.println();
+	}
+	writer.close();
+    }
+
+    /**
+     *  if the 'features' for word 'word' include information on its
+     *  base form, and the base form differs from the inflected form,
+     *  add the inflected form to the 'inflections' map.
+     */
+
+    private static void addInflection (Map<String, Set<String>> inflections, 
+				       String word, FeatureSet features) {
+	if (!(features.get("pa") instanceof FeatureSet)) return;
+	FeatureSet pa = (FeatureSet) features.get("pa");
+	if (pa == null) return;
+	String lemma = (String) pa.get("head");
+	if (lemma == null) return;
+	if (word.equals(lemma)) return;
+	if (inflections.get(lemma) == null)
+	    inflections.put(lemma, new HashSet<String>());
+	inflections.get(lemma).add(word);
     }
 }
