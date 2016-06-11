@@ -207,11 +207,26 @@ public class Control {
 				tagTimex(doc, span);
 			} else if (action == "setReferenceTime") {
 				setReferenceTime(doc, span);
+			} else if (findAction(action) != null) {
+				JetAction customAction = findAction(action);
+				if (customAction != null) {
+					if (!customAction.initialized()) {
+					    System.err.println("WARNING:" + customAction.getClass().getName() + " is not initialized.");
+					}
+					customAction.process(doc, span);
+				}
+				else {
+					System.err.println("User defined action not found or not initialized:" + action);
+				}
 			} else {
 				System.out.println("Unknown Jet.processSentence action: " + action);
 			}
 
 		}
+	}
+
+	private static JetAction findAction(String action) {
+		return JetTest.actionMap.get(action);
 	}
 
 	private static String[] splitAtComma(String str) {

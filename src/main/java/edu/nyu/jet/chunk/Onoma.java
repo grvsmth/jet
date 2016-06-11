@@ -30,22 +30,24 @@ public class Onoma {
 		BufferedReader reader = new BufferedReader (new FileReader (fileName));
 		String line;
 		while ((line = reader.readLine()) != null) {
-			String[] fields = line.split("\t");
-			if (fields.length < 2 || fields.length > 3) {
-				System.out.println ("Invalid onoma line: " + line);
-				continue;
-			}
-			String name = fields[0];
-			String type = fields[1];
-			String subtype = null;
-			if (fields.length == 3)
-				subtype = fields[2];
-			Lexicon.clearEntry (Gazetteer.splitAtWS(name));
-			Lexicon.addEntry (Gazetteer.splitAtWS(name),
-                                          new FeatureSet ("TYPE", type, "SUBTYPE", subtype),
-                                          "onoma");
-			n++;
+		    String[] fields = line.split("\t");
+		    if (fields.length < 2 || fields.length > 3) {
+			System.out.println ("Invalid onoma line: " + line);
+			continue;
+		    }
+		    String name = fields[0];
+		    String type = fields[1];
+		    String subtype = null;
+		    if (fields.length == 3)
+			subtype = fields[2];
+		    Lexicon.clearEntry (Gazetteer.splitAtWS(name));
+		    Lexicon.addEntry (
+		      Gazetteer.splitAtWS(name),
+		      new FeatureSet ("TYPE", type, "SUBTYPE", subtype),
+		      "onoma");
+		    n++;
 		}
+		reader.close();
 		System.out.println ("Onoma:  read " + n + " names.");
 	}
 

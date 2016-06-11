@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 import java.util.Vector;
 
 import edu.nyu.jet.lisp.FeatureSet;
-import edu.nyu.jet.parser.ParseTreeNode;
 import edu.nyu.jet.tipster.*;
 import edu.nyu.jet.util.IOUtils;
 import edu.nyu.jet.zoner.SentenceSplitter;

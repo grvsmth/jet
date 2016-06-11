@@ -1,6 +1,6 @@
 // -*- tab-width: 4 -*-
 //Title:        JET
-//Version:      1.8.0
+//Version:      1.8.3
 //Description:  A Java-based Information Extraction Tool
 
 package edu.nyu.jet;
@@ -18,6 +18,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
+import edu.nyu.jet.actions.JetAction;
 import edu.nyu.jet.aceJet.Gazetteer;
 import edu.nyu.jet.chunk.Chunker;
 import edu.nyu.jet.chunk.MENameTagger;
@@ -72,7 +73,7 @@ public class JetTest {
 
 	static protected Properties defaultConfig = new Properties();
 
-	static protected Properties config = null;
+	static public Properties config = null;
 
 	static private File configFile;
 
@@ -108,6 +109,8 @@ public class JetTest {
 
 	private static NumberAnnotator numberAnnotator = new NumberAnnotator();
 
+	public static Map<String, JetAction> actionMap = new HashMap<String, JetAction>();
+
 	static {
 		defaultConfig.put("processDocument", "tag(TEXT), TEXT:processTextZone");
 		defaultConfig.put("processTextZone", "sentenceSplit, sentence:processSentence");
@@ -140,7 +143,7 @@ public class JetTest {
 				new AnnotationColor(dataPath);
 			}
 			initialize();
-			System.err.println("Jet Ver. 1.8.1.  Portions (c) 1999-2015 R. Grishman");
+			System.err.println("Jet Ver. 1.8.3.  Portions (c) 1999-2015 R. Grishman");
 			JarDate.print(System.err);
 			System.err.println("Licensed under Apache License, Version 2.0.");
 			validateConfig (config);
@@ -165,6 +168,8 @@ public class JetTest {
 		Iterator iter = config.keySet().iterator();
 	    lp:	while (iter.hasNext()) {
 			String pname = (String) iter.next();
+			if (pname.startsWith("Jet.user."))
+				continue lp;
 			if (validProperties.contains(pname))
 				continue lp;
 			for (String s : validProperties)
@@ -262,6 +267,53 @@ public class JetTest {
 	 * load all lexicons specified by parameters beginning with the string
 	 * <CODE>EnglishLex.fileName</CODE>
 	 */
+
+	/**
+	 * Initialize user-defined actions.
+	 *
+	 * Users can define actions in the properties file:
+	 * Jet.user.actions = actionName1;Jet.ActionName2
+	 *
+	 * If the name of the action starts with a lowercase character, Jet will expand the name to Jet.Actions.ActionName1
+	 * and search for the class. Otherwise Jet will simply look for the class using the name of the action.
+	 *
+	 * If the customized action needs to be initialized, we can add a
+	 *
+	 * Jet.Actions.ActionName1.Params property for the action actionName1 (actionClassName + ".Params"), and the value
+	 * of this property will be passed to the initialize() method of the user defined JetAction
+	 *
+	 * All user actions must implement the JetAction interface.
+	 */
+
+	public static void initializeJetActions() {
+		String actions = config.getProperty("Jet.user.actions");
+		if (actions == null) return;
+		String[] actionNames = actions.split(";");
+		actionMap.clear();
+		for (String actionName : actionNames) {
+			actionName = actionName.trim();
+			try {
+				String actionClassName;
+				if (Character.isLowerCase(actionName.charAt(0))) {
+					actionClassName = "Jet.Actions." + actionName.substring(0, 1).toUpperCase() +
+						actionName.substring(1, actionName.length());
+				}
+				else {
+					actionClassName = actionName;
+				}
+				JetAction action = (JetAction)Class.forName(actionClassName).newInstance();
+				String params = null;
+				if (config.containsKey(actionClassName + ".Params")) {
+					params = config.getProperty(actionClassName + ".Params");
+				}
+				action.initialize(params);
+				actionMap.put(actionName, action);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static void readLexicons() {
 		Lexicon.clear();
