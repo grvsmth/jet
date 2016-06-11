@@ -26,8 +26,6 @@ public class DepParser {
 
     private static FullSystemWrapper fsw=null;
 
-    static DepTransformer transformer = null;
-
     /**
      *  load the parse model file from parameter 'DepParser.model.fileName'
      *  of the Jet properties file.
@@ -37,19 +35,19 @@ public class DepParser {
 	String parseModelFile = config.getProperty("DepParser.model.fileName");
 	if (parseModelFile != null) {
 	    initWrapper(dataPath + "/" + parseModelFile);
-	    transformer = new DepTransformer (config.getProperty("DepParser.transformations"));
 	}
     }
 
     /**Initialize the Wrapper*/
-    private static void initWrapper(String parseModelFile){
+    public static void initWrapper(String parseModelFile){
 	initWrapper(null, null, null, null, null, null, parseModelFile, null);
     }
     /**Initialize the Wrapper*/
-    private static void initWrapper(String prepositionModelFile, String nounCompoundModelFile,
-				    String possessivesModelFile, String srlArgsModelFile, 
-				    String srlPredicatesModelFile, String posModelFile, 
-				    String parseModelFile, String wnDir){
+    private static void initWrapper(
+      String prepositionModelFile, String nounCompoundModelFile,
+      String possessivesModelFile, String srlArgsModelFile, 
+      String srlPredicatesModelFile, String posModelFile, 
+      String parseModelFile, String wnDir){
 	if (fsw==null){
 	    try{
 		fsw=new FullSystemWrapper(prepositionModelFile, 
