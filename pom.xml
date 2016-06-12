@@ -48,10 +48,10 @@
                   <id>install-mallet</id>
                   <phase>process-resources</phase>
                   <configuration>
-                    <file>${basedir}/lib/mallet.jar</file>
+                    <file>${project.basedir}/lib/mallet.jar</file>
                     <repositoryLayout>default</repositoryLayout>
                     <groupId>edu.umass.cs</groupId>
-                    <artifactId>base.mallet</artifactId>
+                    <artifactId>mallet</artifactId>
                     <version>0.4</version>
                     <packaging>jar</packaging>
                     <generatePom>true</generatePom>
@@ -64,10 +64,10 @@
                   <id>install-mallet-crf</id>
                   <phase>process-resources</phase>
                   <configuration>
-                    <file>${basedir}/lib/mallet-crf.jar</file>
+                    <file>${project.basedir}/lib/mallet-crf.jar</file>
                     <repositoryLayout>default</repositoryLayout>
                     <groupId>edu.umass.cs</groupId>
-                    <artifactId>base.mallet.fst</artifactId>
+                    <artifactId>mallet.fst</artifactId>
                     <version>0.4</version>
                     <packaging>jar</packaging>
                     <generatePom>true</generatePom>
@@ -80,7 +80,7 @@
                   <id>install-fanseparser</id>
                   <phase>process-resources</phase>
                   <configuration>
-                    <file>${basedir}/lib/fanseparser-0.2.2.jar</file>
+                    <file>${project.basedir}/lib/fanseparser-0.2.2.jar</file>
                     <repositoryLayout>default</repositoryLayout>
                     <groupId>edu.isi</groupId>
                     <artifactId>fanseparser</artifactId>
